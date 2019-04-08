@@ -95,20 +95,20 @@ int main(void) {
 		}
 	}*/
 	/* 포인터 *   
-		
 		& : 주소 반환 연산자
-	
-	*/
 
+		포인터 변수에 *를 붙이면 변수가 가리키고 있는 공간의 data를 반환한다.
+	*/
+	//  %p는 주소를 출력하는 서식 문자
 	int iNumber = 10;
 	int *piNum = &iNumber;
 
 	printf_s("%p : iNumber 의 주소 \n", &iNumber);
-	printf_s("%p : piNum변수가 담고 있는 주소 \n", piNum);
+	printf_s("%p : piNum변수가 담고 있는 주소 \n", piNum); //piNum한테는 그게 data
 
-	printf_s("%p : piNum의 주소 \n", &piNum);
+	printf_s("%p : piNum의 주소 \n", &piNum);  //piNum자기 주소
 	
-	printf_s("%d       : piNum 변수가 담고 있는 주소의 값 \n", *piNum);
+	printf_s("%d       : piNum 변수가 담고 있는 주소의 값 \n", *piNum); //   *를 쓰면 자기(주소)가 가리키는 data에 접근 가능
 	printf_s("%d       : iNumber의 값 \n", iNumber);
 
 
