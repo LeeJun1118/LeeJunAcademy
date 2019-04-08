@@ -29,7 +29,7 @@ int main(void)
 	*******************************************/
 
 	//** 헝가리안 표기법 
-	float fHeight = 0.0;
+	/*float fHeight = 0.0;
 	float fWeight = 0.0;
 	float fBmi = 0.0;
 
@@ -65,6 +65,28 @@ int main(void)
 	{
 		printf_s("고도 비만 입니다. \n");
 	}
+	*/
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	system("pause");
 	return 0;
