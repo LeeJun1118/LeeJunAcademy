@@ -89,24 +89,47 @@ int main(void) {
 
 	int iRand = rand()% 45 +1;
 	*/
+
+	srand(time(NULL));
 	int iRand = rand() % 45 + 1;
 	
 	Numbers* ptNumberList[5];
 	
-	srand(time(NULL));
+	
 	
 
 	for (int i = 0; i < 5; i++)
 	{
-
 		//5개의 공간 생성
 		 ptNumberList[i] = (Numbers*)malloc(sizeof(Numbers));
 		
 		for (int j = 0; j < 6; j++)
 		{
+			for (int k = j+1; k < 5; k++)
+			{
+				if (ptNumberList[i]->Number[j] == ptNumberList[i]->Number[k]) {
+					int l = 0;
+					while (true) {
+						
+						for (int l = 0; l < 6; l++)
+						{
+							if (ptNumberList[i]->Number[j] != ptNumberList[i]->Number[l]) {
+								l++;
+							}
+							else {
+								ptNumberList[i]->Number[j] = rand() % 45 + 1;
+								if (l == j)
+									break;
+							}
+								
+						}
+					}
+					
+					
+				}
+
+			}
 			
-			//난수를 ptNumberList가 가리키는 Number에 저장
-			ptNumberList[i]->Number[j] = rand() % 45 + 1;
 
 			printf_s("%d ", ptNumberList[i]->Number[j]);
 		}
