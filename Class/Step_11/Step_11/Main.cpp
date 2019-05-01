@@ -1,6 +1,7 @@
 #include "Headers.h"
 
 
+
 //** 함수 전방선언
 char* SetName();
 Student* CreateStudent();
@@ -8,14 +9,15 @@ void Initialize(Student* _pStudent);
 void Render(Student* _pStudent);
 
 
+
 int main(void)
 {
 	//** 동적 할당
 	Student* pStudent = CreateStudent();
-
 	Render(pStudent);
 
 	system("pause");
+
 	return 0;
 }
 
@@ -41,6 +43,7 @@ char* SetName()
 Student* CreateStudent()
 {
 	Student* pStudent = (Student*)malloc(sizeof(Student));
+
 	Initialize(pStudent);
 
 	return pStudent;
