@@ -33,10 +33,15 @@ int main(void)
 	//크기가 3인 포인터 배열을 선언했다.
 	
 	Student* ptStudent[3];
+	
+	SetScene();
+	/*
 	for (int i = 0; i < 3; i++)
 	{
 		ptStudent[i] = CreateStudent();
 	}
+	
+	*/
 	
 	
 
@@ -73,8 +78,15 @@ void SetScene()
 		printf_s("입력 : ");
 		scanf_s("%d", &iChoice);
 
-		if (iChoice == 1)
+		if (iChoice == 1) {
 			eSCENEID = 학생추가;
+			Student* ptStudent[3];
+			for (int i = 0; i < 3; i++)
+			{
+				ptStudent[i] = CreateStudent();
+			}
+
+		}
 		else if (iChoice == 2)
 			eSCENEID = 학생삭제;
 		else if (iChoice == 3)
@@ -135,15 +147,7 @@ Student* CreateStudent()
 	
 	Initialize(pStudent);
 
-	//숫자 입력해서 그 수만큼 생성해보기
-	/*
-	Student* ptStudent[iStudents];
-	for (int i = 0; i < iStudents; i++)
-	{
-		ptStudent[i] = Initialize(pStudent);
-	}
 
-	*/
 
 	return pStudent;
 }
