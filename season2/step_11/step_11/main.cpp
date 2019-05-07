@@ -94,6 +94,7 @@ void SetScene()
 	}
 		break;
 
+
 	case 학생추가:
 		system("cls");
 		printf_s("학생 추가 매뉴 \n");
