@@ -6,6 +6,7 @@
 #include <malloc.h>
 #include <time.h>
 #include <string>
+#include <Windows.h>
 
-
+#include "Enum.h"
 #include "Struct.h"

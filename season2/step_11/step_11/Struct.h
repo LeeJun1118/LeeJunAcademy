@@ -1,28 +1,18 @@
 #pragma once
 
-typedef struct tagStudent
+typedef struct tagObject
 {
 	char* pName;
-	int iKor;
-	int iEng;
-	int iMath;
 
-	//** 생성됨과 동시에 호출 됨.
-	tagStudent() //** 생성자.
-	{
-		iKor = 0;
-		iEng = 0;
-		iMath = 0;
-		printf_s("생성 되었습니다.\n");
-	};
+	int iAtt;
+	int iDef;
 
-	//** 사용자가 호출 할 때 호출 됨.
-	tagStudent(int _iKor, int _iEng, int _iMath)
-	{	//** 복사 생성자
-		iKor = _iKor;
-		iEng = _iEng;
-		iMath = _iMath;
-		printf_s("복사 생성되었습니다.\n");
-	};
+	int iHp;
+	int iMp;
 
-}Student;
+	tagObject() {};
+
+	tagObject(int _iAtt, int _iDef, int _iHp, int _iMp)
+		: iAtt(_iAtt), iDef(_iDef), iHp(_iHp), iMp(_iMp) {};
+
+}Object;
