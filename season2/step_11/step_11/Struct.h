@@ -7,12 +7,12 @@ typedef struct tagObject
 	int iAtt;
 	int iDef;
 
-	int iHp;
-	int iMp;
+	int iHP;
+	int iMP;
 
 	tagObject() {};
 
-	tagObject(int _iAtt, int _iDef, int _iHp, int _iMp)
-		: iAtt(_iAtt), iDef(_iDef), iHp(_iHp), iMp(_iMp) {};
+	tagObject(int _iAtt, int _iDef, int _iHP, int _iMP)
+		: iAtt(_iAtt), iDef(_iDef), iHP(_iHP), iMP(_iMP) {};
 
 }Object;
