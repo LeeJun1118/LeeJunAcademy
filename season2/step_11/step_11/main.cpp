@@ -35,9 +35,10 @@ int main(void)
 
 	//** 아래 코드는 수정하지 마세요
 
+	srand(GetTickCount() * GetTickCount());
+
 	for (int i = 0; i < 10; i++)
 	{
-		srand(GetTickCount() * GetTickCount());
 		int iRand = rand();
 		
 
@@ -63,16 +64,13 @@ int main(void)
 
 		//** 풀이한 코드를 작성합니다.
 		if (iRand % 2 == 0) 
-		{
-			Sleep(100);
 			printf_s("%d = 0 \n", iRand);
-		}
-			
-		else 
-		{
-			Sleep(100);
-			printf_s("%d = 1 \n",iRand);
-		}
+		else
+			printf_s("%d = 1 \n", iRand);
+
+		Sleep(100);
+
+		//** 아주 잘하셨습니다 !!
 
 		//** 풀이한 코드 작성을 끝냅니다.
 	}
