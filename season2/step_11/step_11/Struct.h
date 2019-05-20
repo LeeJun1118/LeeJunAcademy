@@ -20,6 +20,8 @@ typedef struct tagTransform
 	Vector3 Position;
 	Vector3 Scale;
 
+	DIRID eDirection;
+
 }Transform;
 
 
