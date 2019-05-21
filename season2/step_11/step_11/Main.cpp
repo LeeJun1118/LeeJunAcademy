@@ -26,7 +26,7 @@ void InitBullet(Object* _pBullet);
 void BulletProgress(Object* _pBullet[]);
 void BulletRender(Object* _pBullet[]);
 void CreateBullet(Object* _pBullet[], Object* _pPlayer);
-void SetBullletDirection(Object* _pBullet,DWORD _dwDir);
+void SetBulletDirection(Object* _pBullet, DIRID _dwDirid);
 
 void BackGroundRender();
 
@@ -162,7 +162,8 @@ void InitPlayer(Object* _pPlayer)
 {
 	_pPlayer->pName = (char*)"옷";
 
-	_pBullet->TransPos.dwDirection = KEYID_CENTER;
+	//_pPlayer->TransPos.dwDirection = KEYID_CENTER;
+	_pPlayer->TransPos.eDirection = DIRID_CENTER;
 	_pPlayer->TransPos.Position = Vector3(0.f, 0.f);
 	_pPlayer->TransPos.Scale = Vector3(strlen(_pPlayer->pName), 1.f);
 
@@ -178,26 +179,26 @@ void PlayerProgress(Object* _pPlayer, Object* _pBullet[])
 	if (dwKey & KEYID_UP)
 	{
 		_pPlayer->TransPos.Position.y--;
-		_pPlayer->TransPos.dwDirection = KEYID_UP;
+		_pPlayer->TransPos.eDirection = DIRID_UP;
 
 	}
 	if (dwKey & KEYID_DOWN)
 	{
 		_pPlayer->TransPos.Position.y++;
-		_pPlayer->TransPos.dwDirection = KEYID_DOWN;
+		_pPlayer->TransPos.eDirection = DIRID_DOWN;
 
 	}
 	if (dwKey & KEYID_LEFT)
 	{
 		_pPlayer->TransPos.Position.x--;
-		_pPlayer->TransPos.dwDirection = KEYID_LEFT;
+		_pPlayer->TransPos.eDirection = DIRID_LEFT;
 
 
 	}
 	if (dwKey & KEYID_RIGHT)
 	{
 		_pPlayer->TransPos.Position.x++;
-		_pPlayer->TransPos.dwDirection = KEYID_RIGHT;
+		_pPlayer->TransPos.eDirection = DIRID_RIGHT;
 
 	}
 	//**만약 스페이스 키를 입력 했다면
@@ -225,8 +226,7 @@ void InitMonster(Object* _pMonster)
 	_pMonster->pName = (char*)"★";
 	_pMonster->TransPos.Position = Vector3(0.f, 0.f);
 	_pMonster->TransPos.Scale = Vector3(strlen(_pMonster->pName), 0.f);
-	_pMonster->TransPos.dwDirection = KEYID_CENTER;
-	
+	_pMonster->TransPos.eDirection = DIRID_CENTER;
 	
 }
 void MonsterProgress(Object* _pMonster[])
@@ -287,14 +287,14 @@ void InitBullet(Object* _pBullet)
 {
 	_pBullet->pName = (char*)"장풍";
 
-	_pBullet->TransPos.dwDirection = KEYID_CENTER;
+	_pBullet->TransPos.eDirection = DIRID_CENTER;
 	_pBullet->TransPos.Position = Vector3(0.f, 0.f);
 	//문자열 길이의 크기만큼
 	_pBullet->TransPos.Scale = Vector3(strlen(_pBullet->pName), 1.f);
 
 }
 
-void BulletProgress(Object* _pPlayer,Object* _pBullet[])
+void BulletProgress(Object* _pBullet[])
 {
 	//** 모든 총알을 확인
 	for (int i = 0; i < BULLET_MAX; i++)
@@ -304,9 +304,9 @@ void BulletProgress(Object* _pPlayer,Object* _pBullet[])
 		{
 			//** 총알이 x좌표를 2씩 증가시킨다.
 	
-			switch (_pBullet[i]->TransPos.dwDirection)
+			switch (_pBullet[i]->TransPos.eDirection)
 			{
-			case KEYID_UP:
+			case DIRID_UP:
 				_pBullet[i]->TransPos.Position.y--;
 
 				//** 만약 증가된 후에 y좌표가 월드좌표 0보다 작다면..
@@ -321,7 +321,7 @@ void BulletProgress(Object* _pPlayer,Object* _pBullet[])
 				}
 				break;
 				
-			case KEYID_DOWN:
+			case DIRID_DOWN:
 				_pBullet[i]->TransPos.Position.y++;
 
 				//** 만약 증가된 후에 y좌표가 월드좌표 25보다 크다면..
@@ -337,7 +337,7 @@ void BulletProgress(Object* _pPlayer,Object* _pBullet[])
 				
 				break;
 				
-			case KEYID_RIGHT:
+			case DIRID_RIGHT:
 				_pBullet[i]->TransPos.Position.x+=2;
 
 				//** 만약 증가된 후에 x좌표가 월드좌표 0보다 작다면..
@@ -354,7 +354,7 @@ void BulletProgress(Object* _pPlayer,Object* _pBullet[])
 
 				break;
 				
-			case KEYID_LEFT:
+			case DIRID_LEFT:
 				_pBullet[i]->TransPos.Position.x -= 2;
 
 				//** 만약 증가된 후에 x좌표가 월드좌표 0보다 작다면..
@@ -416,16 +416,16 @@ void CreateBullet(Object* _pBullet[], Object* _pPlayer)
 			//**총알의 위치를 플레이어의 좌표로 변겅
 			_pBullet[i]->TransPos.Position = _pPlayer->TransPos.Position;
 			
-			SetBullletDirection(_pBullet[i], _pPlayer->TransPos.dwDirection);
+			SetBulletDirection(_pBullet[i], _pPlayer->TransPos.eDirection);
 
 			//**모든작업 종료된후 구문 탈출.
 			break;
 		}
 	}
 }
-void SetBullletDirection(Object* _pBullet, DWORD _dwDir)
+void SetBulletDirection(Object* _pBullet, DIRID _dwDirid)
 {
-	_pBullet->TransPos.dwDirection = _dwDir;
+	_pBullet->TransPos.eDirection = _dwDirid;
 
 }
 
@@ -436,7 +436,7 @@ void BackGroundRender()
 	{
 		if (y == 0 || y == (WINSIZEY - 1))
 		{
-			SetCursorPosiotion(0, y, (char*)"■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+			SetCursorPosition(0, y, (char*)"■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		}
 
 		else
