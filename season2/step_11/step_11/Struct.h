@@ -25,17 +25,13 @@ typedef struct tagTransform
 }Transform;
 
 
-
-
 typedef struct tagObject
 {
 	char* pName;
 	
 	Transform TransPos;
 
-
 	tagObject() {};
-
 	
 }Object;
 

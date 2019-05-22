@@ -26,7 +26,7 @@ void InitBullet(Object* _pBullet);
 void BulletProgress(Object* _pBullet[]);
 void BulletRender(Object* _pBullet[]);
 void CreateBullet(Object* _pBullet[], Object* _pPlayer);
-void SetBulletDirection(Object* _pBullet, DIRID _dwDirid);
+void SetBullletDirection(Object* _pBullet, DIRID _eDir);
 
 void BackGroundRender();
 
@@ -162,9 +162,8 @@ void InitPlayer(Object* _pPlayer)
 {
 	_pPlayer->pName = (char*)"옷";
 
-	//_pPlayer->TransPos.dwDirection = KEYID_CENTER;
 	_pPlayer->TransPos.eDirection = DIRID_CENTER;
-	_pPlayer->TransPos.Position = Vector3(0.f, 0.f);
+	_pPlayer->TransPos.Position = Vector3(2.f, 1.f);
 	_pPlayer->TransPos.Scale = Vector3(strlen(_pPlayer->pName), 1.f);
 
 	
@@ -228,6 +227,7 @@ void InitMonster(Object* _pMonster)
 	_pMonster->TransPos.Scale = Vector3(strlen(_pMonster->pName), 0.f);
 	_pMonster->TransPos.eDirection = DIRID_CENTER;
 	
+	
 }
 void MonsterProgress(Object* _pMonster[])
 {
@@ -287,7 +287,7 @@ void InitBullet(Object* _pBullet)
 {
 	_pBullet->pName = (char*)"장풍";
 
-	_pBullet->TransPos.eDirection = DIRID_CENTER;
+	_pBullet->TransPos.eDirection = DIRID_RIGHT;
 	_pBullet->TransPos.Position = Vector3(0.f, 0.f);
 	//문자열 길이의 크기만큼
 	_pBullet->TransPos.Scale = Vector3(strlen(_pBullet->pName), 1.f);
@@ -416,16 +416,17 @@ void CreateBullet(Object* _pBullet[], Object* _pPlayer)
 			//**총알의 위치를 플레이어의 좌표로 변겅
 			_pBullet[i]->TransPos.Position = _pPlayer->TransPos.Position;
 			
-			SetBulletDirection(_pBullet[i], _pPlayer->TransPos.eDirection);
+			SetBullletDirection(_pBullet[i], _pPlayer->TransPos.eDirection);
 
 			//**모든작업 종료된후 구문 탈출.
 			break;
 		}
 	}
 }
-void SetBulletDirection(Object* _pBullet, DIRID _dwDirid)
+
+void SetBullletDirection(Object* _pBullet, DIRID _eDir)
 {
-	_pBullet->TransPos.eDirection = _dwDirid;
+	_pBullet->TransPos.eDirection = _eDir;
 
 }
 
