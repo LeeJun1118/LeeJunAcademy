@@ -19,4 +19,4 @@ const int BULLET_MAX = 128;
 const int OBJ_MAX	= 2;
 
 const int WINSIZEX	= 100;
-const int WINSIZEY	= 25;
+const int WINSIZEY	= 30;
