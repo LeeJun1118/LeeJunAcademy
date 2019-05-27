@@ -35,3 +35,9 @@ typedef struct tagObject
 	
 }Object;
 
+typedef struct tagLogo
+{
+	char* pName;
+	Transform TransPos;
+
+}Logo;

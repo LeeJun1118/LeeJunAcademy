@@ -14,7 +14,7 @@ const DWORD KEYID_ENTER		= 0x00000080;
 
 
 const int MONSTER_MAX = 128;
-const int BULLET_MAX = 128;
+const int PLAYER_MAX = 128;
 
 const int OBJ_MAX	= 2;
 
