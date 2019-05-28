@@ -17,6 +17,8 @@ float fPlayerSpeed = 2;
 int iPlayerCount = 0;
 DWORD FrameTime = 280;
 
+DWORD MenuFrame;
+DWORD MenuCheck = 0;
 
 Logo* pLogo[13];
 
@@ -87,7 +89,7 @@ int main(void)
 	//** Create Monster Time Initialize
 	dwMonsterTime = GetTickCount();
 
-
+	MenuFrame = GetTickCount();
 
 	while (true)
 	{
@@ -114,10 +116,11 @@ int main(void)
 
 void SetScene(Object* _pPlayer[], Object* _pMonster[])
 {
+	SetCursorColor(15);
 	switch (eSCENEID)
 	{
 	case SCENEID_LOGO:
-		pLogo[0]->iColor = rand()%16;
+		pLogo[0]->iColor = rand() % 15 + 1;
 
 		if (iLogoCheck)
 		{
@@ -125,35 +128,52 @@ void SetScene(Object* _pPlayer[], Object* _pMonster[])
 			{
 				pLogo[i]->TransPos.Position.y -= 1;
 
-
 				if(pLogo[i]->TransPos.Position.y <= 1)
 					eSCENEID = SCENEID_MENU;
 
-
-				SetCursorPosiotion(
-					int(pLogo[i]->TransPos.Position.x),
-					int(pLogo[i]->TransPos.Position.y),
-					pLogo[i]->pName, pLogo[i]->iColor);
 			}
 		}
 
-		
+		for (int i = 0; i < 13; i++)
+		{
+			SetCursorPosiotion(
+				int(pLogo[i]->TransPos.Position.x),
+				int(pLogo[i]->TransPos.Position.y),
+				pLogo[i]->pName, pLogo[0]->iColor);
+		}
 
 		if (GetAsyncKeyState(VK_RETURN))
 		{
-			for (int i = 0; i < 13; i++)
-			{
-
-			}
-			pLogo[i]->TransPos.Position.y -= 1;
-
+			iLogoCheck = 1;
+			Sleep(50);
 		}
-			eSCENEID = SCENEID_MENU;
+
 
 		break;
 
 	case SCENEID_MENU:
-		FrameTime = 280;
+		for (int i = 0; i < 13; i++)
+		{
+			SetCursorPosiotion(
+				int(pLogo[i]->TransPos.Position.x),
+				int(pLogo[i]->TransPos.Position.y),
+				pLogo[i]->pName, pLogo[0]->iColor);
+		}
+
+		if (MenuFrame + 150 < GetTickCount())
+		{
+			MenuFrame = GetTickCount();
+
+
+			if (!MenuCheck)
+			{
+				SetCursorPosiotion(35, 17, (char*)"I n s e r t   C o i n ", 15);
+			}
+
+			MenuCheck = !MenuCheck;
+		}
+		if (GetAsyncKeyState(VK_RETURN))
+			eSCENEID = SCENEID_STAGE;
 
 		for (int i = 0; i < PLAYER_MAX; i++)
 			_pPlayer[i] = NULL;
@@ -165,14 +185,11 @@ void SetScene(Object* _pPlayer[], Object* _pMonster[])
 
 		iGameover = 0;
 		iPlayerCount = 0;
+		FrameTime = 280;
 
 		for (int i = 0; i < MONSTER_MAX; i++)
 			_pMonster[i] = NULL;
 
-		printf_s("SCENEID_MENU\n");
-		system("pause");
-
-		eSCENEID = SCENEID_STAGE;
 		break;
 
 	case SCENEID_STAGE:
