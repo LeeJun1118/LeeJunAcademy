@@ -40,4 +40,6 @@ typedef struct tagLogo
 	char* pName;
 	Transform TransPos;
 
+	int iColor;
+
 }Logo;
